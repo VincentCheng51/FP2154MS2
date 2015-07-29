@@ -1,36 +1,34 @@
 // Final Project Milestone 2
-// dev Tester program
-// File	ReadWriteTester.cpp
+// Submission Tester program
+// File	ms2.cpp
 // Version 1.0
-// Date	2015/07/24
+// Date	2015/07/28
 // Author	Fardad Soleimanloo
-//
+// 
 //
 // Revision History
 // -----------------------------------------------------------
 // Name               Date                 Reason
-// Fardad             2015/07/24           Preliminary release
+// Fardad             2015/04/01           Preliminary release
 /////////////////////////////////////////////////////////////////
 #include <iostream>
 #include "MyFile.h"
 using namespace std;
 using namespace oop244;
 int main(){  
-  fstream file;
-  MyFile F("readwrite.txt");
-  cout << "Run this program few times and keep adding to" <<endl<<"the content of the file created." << endl;
+  fstream file("ms2.txt", ios::out);
+  file << "one" << endl << "two" << endl;
+  file.close();
+  MyFile F("ms2.txt");
   F.load(file);
-  cout << "Linear content of file readwrite.txt: " << endl << endl << F << endl;
-  cout << "Press <ENTER> to continue...";
-  cin.ignore();
-  cout << endl << "readwrite.txt as is: " << endl;
+  cout << "Linear: " << F << endl;
+  cout << "As is: " << endl;
   F.print();
-  cout << " ---------------- " << endl << "Enter a text and then"
-        <<endl<<"On windows end it by pressing <Ctrl-Z> and <ENTER> in a new line"
-        <<endl<<"On Linux or mac end it with a new line with <Ctrl-D>" 
-        <<endl<< "to append to the end of readwrite.txt:" << endl;
+  cout << "Enter the folowing: " << endl << "three<ENTER>" << endl << "four<ENTER>" << endl << "<Ctrl-Z><ENTER>" << endl << endl;
   cin >> F;
   F.store(file);
-  cout << "Re-run the program to see the appended lines." << endl;
+  F.load(file);
+  cout << F << endl;
+  F.print();
   return 0;
 }
